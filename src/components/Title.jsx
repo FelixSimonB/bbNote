@@ -4,7 +4,7 @@ import "../styles/title.css";
 const Title = () => {
     return (
         <div id="title">
-            <span className="icon">🌸</span>
+            <span className="icon"><img className="icon" src="./bbNote.ico"></img></span>
             bbNote
         </div>
     );

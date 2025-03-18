@@ -12,6 +12,14 @@
     --spinner-animation-speed: 2s;
 }
 
+.sticker-2 {
+    float: left;
+    transform: translate(40px, -40px);
+    position: fixed;
+    z-index: 1001;
+    left: 42px;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -56,6 +64,24 @@ body {
     padding: 10px;
     animation: fadeIn 0.5s ease-in-out;
     transition: transform 0.2s ease-in-out;
+}
+
+.card::before {
+    content: '';
+    width: 40%;
+    position: absolute;
+    height: 1.6rem;
+    display: block;
+    box-shadow: 0px 1px 2px rgba(253, 252, 165, 0.08);
+    background: rgba(255, 255, 170, 0.37);
+    border-bottom-right-radius: 2px;
+    transform: skew(6deg) rotateZ(-1deg);
+    border-radius: 6px/14px 0;
+    z-index: 2;
+    opacity: .8;
+    top: -.8rem;
+    margin-left: -20%;
+    left: 50%;  
 }
 
 .card:hover {
