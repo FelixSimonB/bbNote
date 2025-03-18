@@ -1,5 +1,5 @@
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
     line-height: 1.5;
     font-weight: 400;
     color-scheme: light dark;
@@ -51,7 +51,30 @@ body {
     border-radius: 5px;
     cursor: pointer;
     position: absolute;
+    background-color: #fff;
     box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075), 0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075), 0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+    padding: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card.transition {
+    transition: left 0.5s ease-in-out, top 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .card-header {
@@ -61,11 +84,13 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 5px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 .card-body {
     padding: 1em;
     border-radius: 0 0 5px 5px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 .card-body textarea {
@@ -75,6 +100,11 @@ body {
     height: 100%;
     resize: none;
     font-size: 16px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-image: linear-gradient(to bottom, transparent 95%, rgba(53, 40, 40, 0.05) 95%);
+    background-size: 100% 23px; /* Ensure background-size matches the line-height */
+    text-align: left;
+    line-height: 23px; /* Ensure line-height matches the background-size */
 }
 
 textarea:focus {

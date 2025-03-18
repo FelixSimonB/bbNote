@@ -26,7 +26,7 @@ const NoteCard = ({ note }) => {
     useEffect(() => {
         autoCardSize(textAreaRef);
 
-        const unsubscribe = subscribe(client, note, setNewBody, setPosition, setColors);
+        const unsubscribe = subscribe(client, note, textAreaRef, setNewBody, setPosition, setColors, autoCardSize);
 
         return () => {
             unsubscribe();
