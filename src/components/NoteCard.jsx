@@ -23,7 +23,15 @@ const NoteCard = ({ note }) => {
         document.addEventListener("mousemove", mouseMove);
         document.addEventListener("mouseup", mouseUp);
         setIsDragging(true);
+        cardToTop(cardRef);
+    };
 
+    const touchStart = (e) => {
+        const touch = e.touches[0];
+        mouseStartPos = { x: touch.clientX, y: touch.clientY };
+        document.addEventListener("touchmove", touchMove);
+        document.addEventListener("touchend", touchEnd);
+        setIsDragging(true);
         cardToTop(cardRef);
     };
 
@@ -39,9 +47,31 @@ const NoteCard = ({ note }) => {
         setPosition(newPosition);
     };
 
+    const touchMove = (e) => {
+        const touch = e.touches[0];
+        const mouseMoveDir = {
+            x: mouseStartPos.x - touch.clientX,
+            y: mouseStartPos.y - touch.clientY,
+        }
+
+        mouseStartPos = { x: touch.clientX, y: touch.clientY };
+
+        const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
+        setPosition(newPosition);
+    };
+
     const mouseUp = () => {
         document.removeEventListener("mousemove", mouseMove);
         document.removeEventListener("mouseup", mouseUp);
+        setIsDragging(false);
+
+        const newPosition = setNewOffset(cardRef.current);
+        saveData('position', newPosition);        
+    };
+
+    const touchEnd = () => {
+        document.removeEventListener("touchmove", touchMove);
+        document.removeEventListener("touchend", touchEnd);
         setIsDragging(false);
 
         const newPosition = setNewOffset(cardRef.current);
@@ -98,6 +128,7 @@ const NoteCard = ({ note }) => {
             <div
                 className="card-header"
                 onMouseDown={mouseDown}
+                onTouchStart={touchStart}
                 style={{ backgroundColor: colors.colorHeader }}
             >
                 <Trash />
