@@ -1,10 +1,17 @@
 import NotesPage from "./pages/NotesPage";
+import NotesProvider from "./context/NotesContext";
+import Title from "./components/Title";
+import References from "./components/References";
 
 function App() {
     return (
       <div id="app">
-        <NotesPage />
-      </div>
+            <Title />
+            <NotesProvider>
+                <NotesPage />
+            </NotesProvider>
+            <References />
+        </div>
     );
 }
 

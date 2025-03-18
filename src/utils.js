@@ -30,11 +30,12 @@ export const parser = (value) => {
     }
 }
 
-export const subscribe = (client, note, setNewBody, setPosition) => {
+export const subscribe = (client, note, setNewBody, setPosition, setColors) => {
     return client.subscribe(`databases.${import.meta.env.VITE_DATABASE_ID}.collections.${import.meta.env.VITE_COLLECTION_NOTES_ID}.documents.${note.$id}`, response => {
         if (response.events.includes('databases.*.collections.*.documents.*.update')) {
             setNewBody(parser(response.payload.body));
             setPosition(JSON.parse(response.payload.position));
+            setColors(JSON.parse(response.payload.colors));
         }
     });
 }

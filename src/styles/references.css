@@ -1,0 +1,43 @@
+.references {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgba(240, 255, 240, 0.8); /* Pastel green background */
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075), 0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075), 0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+    z-index: 1000;
+}
+
+.reference-icon {
+    color: white; /* Pastel yellow color */
+    font-size: 28px;
+    transition: transform 0.3s;
+}
+
+.reference-icon:hover {
+    transform: scale(1.2);
+}
+
+.reference-icon:active {
+    transform: scale(1.1);
+}
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+    .references {
+        top: auto;
+        bottom: 10px;
+        right: 10px;
+        flex-direction: row;
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .reference-icon {
+        font-size: 24px;
+    }
+}

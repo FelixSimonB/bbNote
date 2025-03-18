@@ -1,38 +1,58 @@
 import { useRef, useEffect, useState } from "react";
 import { db, client } from "../appwrite/databases";
-import Trash from "../icons/Trash";
+import DeleteButton from "./DeleteButton";
+import Spinner from "../icons/Spinner";
 import { setNewOffset, autoCardSize, cardToTop, parser, subscribe } from "../utils";
+import { useContext } from "react";
+import { NotesContext } from "../context/NotesContext";
 
 const NoteCard = ({ note }) => {
     const [saving, setSaving] = useState(false);
     const saveTimer = useRef(null);
+    
+    const { setSelectedNote } = useContext(NotesContext);
 
     const body = parser(note.body);
     const [newBody, setNewBody] = useState(body);
     const [position, setPosition] = useState(JSON.parse(note.position));
     const [isDragging, setIsDragging] = useState(false);
-    const colors = JSON.parse(note.colors);
+    const [colors, setColors] = useState(JSON.parse(note.colors));
 
     let mouseStartPos = { x: 0, y: 0 };
     const cardRef = useRef(null);
 
     const textAreaRef = useRef(null);
 
+    useEffect(() => {
+        autoCardSize(textAreaRef);
+
+        const unsubscribe = subscribe(client, note, setNewBody, setPosition, setColors);
+
+        return () => {
+            unsubscribe();
+        };
+    }, [note.$id]);
+
     const mouseDown = (e) => {
-        mouseStartPos = { x: e.clientX, y: e.clientY };
-        document.addEventListener("mousemove", mouseMove);
-        document.addEventListener("mouseup", mouseUp);
-        setIsDragging(true);
-        cardToTop(cardRef);
+        if (e.target.className === "card-header") {
+            mouseStartPos = { x: e.clientX, y: e.clientY };
+            document.addEventListener("mousemove", mouseMove);
+            document.addEventListener("mouseup", mouseUp);
+            setIsDragging(true);
+            cardToTop(cardRef);
+            setSelectedNote(note);
+        }
     };
 
     const touchStart = (e) => {
-        const touch = e.touches[0];
-        mouseStartPos = { x: touch.clientX, y: touch.clientY };
-        document.addEventListener("touchmove", touchMove);
-        document.addEventListener("touchend", touchEnd);
-        setIsDragging(true);
-        cardToTop(cardRef);
+        if (e.target.className === "card-header") {
+            mouseStartPos = { x: e.clientX, y: e.clientY };
+            document.addEventListener("mousemove", mouseMove);
+            document.addEventListener("mouseup", mouseUp);
+            setIsDragging(true);
+            cardToTop(cardRef);
+            setSelectedNote(note);
+        }
     };
 
     const mouseMove = (e) => {
@@ -104,16 +124,6 @@ const NoteCard = ({ note }) => {
     const handleInputChange = (e) => {
         setNewBody(e.target.value);
     };
-
-    useEffect(() => {
-        autoCardSize(textAreaRef);
-
-        const unsubscribe = subscribe(client, note, setNewBody, setPosition);
-
-        return () => {
-            unsubscribe();
-        };
-    }, [note.$id]);
  
     return (
         <div
@@ -131,11 +141,15 @@ const NoteCard = ({ note }) => {
                 onTouchStart={touchStart}
                 style={{ backgroundColor: colors.colorHeader }}
             >
-                <Trash />
+                <DeleteButton noteId={note.$id} />
+
                 {
                     saving && (
-                        <div className="saving">
-                            <span style={{ color: colors.colorText }}>Saving...</span>
+                        <div className="card-saving">
+                            <Spinner color={colors.colorText} />
+                            <span style={{ color: colors.colorText }}>
+                                Saving...
+                            </span>
                         </div>
                     )
                 }
@@ -145,10 +159,13 @@ const NoteCard = ({ note }) => {
                     ref={textAreaRef}
                     onKeyUp={handleKeyUp}
                     style={{ color: colors.colorText }}
-                    value={newBody}
+                    value={newBody ?? ''}
                     onChange={handleInputChange}
                     onInput={() => autoCardSize(textAreaRef)}
-                    onFocus={() => cardToTop(cardRef)}
+                    onFocus={() => {
+                        cardToTop(cardRef);
+                        setSelectedNote(note);
+                    }}
                 ></textarea>
             </div>
         
