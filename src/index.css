@@ -146,7 +146,7 @@ textarea:focus {
     gap: 1em;
     align-items: center;
     position: fixed;
-    left: 1em;
+    right: 1em;
     top: 50%;
     transform: translateY(-50%);
     background-color: #35363e;
