@@ -91,6 +91,13 @@ body {
   top: -0.8rem;
   margin-left: -20%;
   left: 50%;
+  transform: scaleX(0); /* hidden at first */
+  transform-origin: left center;
+  transition: transform 0.4s ease;
+}
+
+.card.transition::before {
+  transform: scaleX(1);
 }
 
 .card:hover {
@@ -257,4 +264,3 @@ textarea:focus {
     width: 35px;
   }
 }
-

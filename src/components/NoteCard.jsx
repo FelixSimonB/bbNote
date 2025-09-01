@@ -8,6 +8,7 @@ import {
   cardToTop,
   parser,
   subscribe,
+  sleep,
 } from "../utils";
 import { useContext } from "react";
 import { NotesContext } from "../context/NotesContext";
@@ -94,21 +95,23 @@ const NoteCard = ({ note }) => {
     setPosition(newPosition);
   };
 
-  const mouseUp = () => {
+  const mouseUp = async (e) => {
     document.removeEventListener("mousemove", mouseMove);
     document.removeEventListener("mouseup", mouseUp);
     setIsDragging(false);
 
     const newPosition = setNewOffset(cardRef.current);
+    await sleep(500);
     saveData("position", newPosition);
   };
 
-  const touchEnd = () => {
+  const touchEnd = async () => {
     document.removeEventListener("touchmove", touchMove);
     document.removeEventListener("touchend", touchEnd);
     setIsDragging(false);
 
     const newPosition = setNewOffset(cardRef.current);
+    await sleep(500);
     saveData("position", newPosition);
   };
 
