@@ -1,17 +1,24 @@
 :root {
-  font-family: "Comic Neue", cursive;
-  font-weight: 600;
-  font-style: italic;
-  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   font-weight: 400;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  line-height: 1.6;
+  color-scheme: light;
+  color: #333;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   --spinner-animation-speed: 2s;
+  
+  /* Pixelution theme colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --border-color: #a8d5ba;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --accent-color: #7fb3d3;
+  --hover-color: #f0f0f0;
 }
 
 .sticker-2 {
@@ -45,222 +52,135 @@
 body {
   padding: 0;
   margin: 0;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 #app {
-  background-color: #212228;
-  background-image:
-    linear-gradient(#292a30 0.1em, transparent 0.1em),
-    linear-gradient(90deg, #292a30 0.1em, transparent 0.1em);
-  background-size: 4em 4em;
-  height: 100vh;
+  background-color: var(--bg-secondary);
+  min-height: 100vh;
   position: relative;
-  overflow: auto;
 }
 
-.card {
-  width: 400px;
-  border-radius: 5px;
+/* Window-like container styling inspired by Pixelution */
+.window-container {
+  background: var(--bg-primary);
+  border: 3px solid var(--border-color);
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.window-header {
+  background: linear-gradient(to bottom, #e8f4f8, #d1e7dd);
+  border-bottom: 2px solid var(--border-color);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+  padding-bottom: 0;
+}
+
+.window-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.window-tab {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  position: relative;
+  top: 2px;
   cursor: pointer;
-  position: absolute;
-  background-color: #fff;
-  box-shadow:
-    0 1px 1px hsl(0deg 0% 0% / 0.075),
-    0 2px 2px hsl(0deg 0% 0% / 0.075),
-    0 4px 4px hsl(0deg 0% 0% / 0.075),
-    0 8px 8px hsl(0deg 0% 0% / 0.075),
-    0 16px 16px hsl(0deg 0% 0% / 0.075);
-  padding: 10px;
-  animation: fadeIn 0.5s ease-in-out;
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.2s ease;
 }
 
-.card::before {
-  content: "";
-  width: 40%;
-  position: absolute;
-  height: 1.6rem;
-  display: block;
-  box-shadow: 0px 1px 2px rgba(253, 252, 165, 0.08);
-  background: rgba(255, 255, 170, 0.37);
-  border-bottom-right-radius: 2px;
-  transform: skew(6deg) rotateZ(-1deg);
-  border-radius: 6px/14px 0;
+.window-tab:hover {
+  background: var(--hover-color);
+  color: var(--text-primary);
+}
+
+.window-tab.active {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--bg-primary);
   z-index: 2;
-  opacity: 0.8;
-  top: -0.8rem;
-  margin-left: -20%;
-  left: 50%;
-  transform: scaleX(0); /* hidden at first */
-  transform-origin: left center;
-  transition: transform 0.4s ease;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: -1px;
 }
 
-.card.transition::before {
-  transform: scaleX(1);
+.window-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-secondary);
 }
 
-.card:hover {
-  transform: scale(1.02);
+.window-content {
+  padding: 24px;
+  background: var(--bg-primary);
+  border-top: none;
+  position: relative;
 }
 
-.card.transition {
-  transition:
-    left 0.5s ease-in-out,
-    top 0.5s ease-in-out;
+/* Post-like styling for content blocks */
+.post-block {
+  background: var(--bg-primary);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.post-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
-.card-header {
-  background-color: #9bd1de;
-  border-radius: 5px 5px 0 0;
+.post-content {
+  padding: 16px;
+}
+
+.post-footer {
+  padding: 8px 16px;
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
-  font-family: "Comic Neue", cursive;
-  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-secondary);
 }
 
-.card-body {
-  padding: 1em;
-  border-radius: 0 0 5px 5px;
-  font-family: "Comic Neue", cursive;
-  font-weight: 600;
+.post-actions {
+  display: flex;
+  gap: 12px;
 }
 
-.card-body textarea {
-  font-family: "Comic Neue", cursive;
-  font-weight: 600;
-  background-color: inherit;
+.post-action {
+  background: var(--accent-color);
+  color: white;
   border: none;
-  width: 100%;
-  height: 100%;
-  resize: none;
-  font-size: 16px;
-  background-image: linear-gradient(
-    to bottom,
-    transparent 95%,
-    rgba(53, 40, 40, 0.05) 95%
-  );
-  background-size: 100% 23px; /* Ensure background-size matches the line-height */
-  text-align: left;
-  line-height: 23px; /* Ensure line-height matches the background-size */
-}
-
-textarea:focus {
-  background-color: inherit;
-  outline: none;
-  width: 100%;
-  height: 100%;
-}
-
-#controls {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  align-items: center;
-  position: fixed;
-  right: 1em;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #35363e;
-  padding: 1em 1em;
-  border-radius: 40px;
-  box-shadow:
-    0 1px 1px hsl(0deg 0% 0% / 0.075),
-    0 2px 2px hsl(0deg 0% 0% / 0.075),
-    0 4px 4px hsl(0deg 0% 0% / 0.075),
-    0 8px 8px hsl(0deg 0% 0% / 0.075),
-    0 16px 16px hsl(0deg 0% 0% / 0.075);
-  z-index: 10000;
-}
-
-#add-btn {
-  background-color: rgba(107, 107, 107, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 11px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.2s;
 }
 
-#add-btn:hover {
-  height: 45px;
-  width: 45px;
+.post-action:hover {
+  background: #6ba3c7;
 }
 
-.color {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.color:hover {
-  height: 45px;
-  width: 45px;
-}
-
-.card.transition {
-  transition:
-    left 0.5s ease-in-out,
-    top 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Media Queries for Mobile Devices */
-@media (max-width: 768px) {
-  .card {
-    width: 90%;
-    left: 5%;
-    top: 10%;
-  }
-
-  #controls {
-    left: 50%;
-    top: auto;
-    bottom: 10px;
-    transform: translateX(-50%);
-    flex-direction: row;
-    gap: 0.5em;
-    padding: 0.5em 1em;
-  }
-
-  #add-btn,
-  .color {
-    height: 30px;
-    width: 30px;
-  }
-
-  #add-btn:hover,
-  .color:hover {
-    height: 35px;
-    width: 35px;
-  }
-}
