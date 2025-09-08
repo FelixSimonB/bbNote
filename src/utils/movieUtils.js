@@ -54,6 +54,13 @@ export const fetchMovies = async (selectedCinema, selectedDate) => {
         }
       }
       
+      if (posterUrl) {
+        posterUrl = posterUrl.replace(
+          "/images/movies/poster/",
+          "/images/movies/poster/400/"
+        );
+      }
+
       // Extract cinema sections with their respective showtimes
       const cinemaHeaders = element.querySelectorAll('.list-group-item.py-3');
       const cinemas = Array.from(cinemaHeaders).map(header => {
