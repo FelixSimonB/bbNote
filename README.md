@@ -1,6 +1,6 @@
 # bbNote
 
-a Note app for couple, which is me and my gf....
+a Note app with other built-in utilities
 
 I used react, vite and appwrite for this
 
