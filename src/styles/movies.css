@@ -1,19 +1,54 @@
-.movies-page {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  background: var(--bg-primary);
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  overflow: hidden;
-  min-height: 100vh;
+.post-header {
+  display: flex;
+  gap: 16px;
 }
 
-/* Base styles for mobile first */
-.movies-content {
+@media (max-width: 768px) {
+  .post-header {
+    flex-direction: column;
+  }
+
+  .movie-poster {
+    width: 100%;
+    min-width: auto;
+    height: auto;
+    max-width: 300px; /* Optional: constrain poster width on mobile */
+    margin: 0 auto; /* Center the poster */
+  }
+
+  .movie-description {
+    padding: 0 16px; /* Add some padding for better spacing */
+  }
+
+  .cinema-selector,
+  .date-selector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.post-footer {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.movie-poster {
   padding: 16px;
-  background: var(--bg-primary);
+  border-radius: 4px;
+  background-color: rgb(var(--postBgColor));
+  border: 2px solid rgb(var(--bordersColor));
+  width: 200px;
+  min-width: 200px;
+  height: 300px;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Tablet and larger */
@@ -21,85 +56,124 @@
   .movies-page {
     max-width: 800px;
     margin: 20px auto;
-    border: 3px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
-  .movies-content {
+  .movie-content {
     padding: 24px;
   }
 }
 
-.movies-content {
+.movie-content {
   background: var(--bg-primary);
   padding: 24px;
   border-top: none;
   position: relative;
 }
 
-.movies-content h2 {
-  color: var(--text-primary);
-  font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+.movie-description {
+  flex: 1;
+}
+
+.movie-title {
+  flex: auto;
+  display: block;
+  overflow: hidden;
+  padding: 0 12px;
+  line-height: 24px;
+  font-family: var(--monospaceFontFamily);
+  font-size: calc(1em - 1px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 2em;
+  color: rgb(var(--postUsernamesTextColor));
+  background-color: rgb(var(--postUsernamesBgColor));
+  border: 2px solid rgb(var(--bordersColor));
+  width: auto;
+  text-align: center;
+}
+
+.movie-title h2 {
+  margin: 0;
+  text-wrap: auto;
+}
+
+.info-block {
+  display: flex;
+  overflow: hidden;
+  margin-top: 4px;
+  line-height: 1.2;
+  border-radius: 4px;
+  background: rgb(var(--postBgColor));
+  border: 2px solid rgb(var(--bordersColor));
+}
+
+.info-label {
+  flex: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  padding: 8px 12px;
+  font-family: var(--monospaceFontFamily);
+  font-size: calc(1em - 1px);
+  width: 120px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgb(var(--accent2TextColor));
+  background-color: rgb(var(--accent2BgColor));
+  border-right: 2px solid rgb(var(--bordersColor));
+}
+
+.info-entry {
+  flex: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 6px 10px;
+}
+
+
+.info-block {
+  margin-top: 5px;
+}
+
+.info-block:first-child {
+  margin-top: 10px;
 }
 
 .cinema-selector, .date-selector {
   margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e0e0e0;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
 .cinema-dropdown,
 #date-select {
-  width: 100%;
-  max-width: 100%;
+  width: auto;
+  max-width: 300px;
   box-sizing: border-box;
 }
 
-@media (min-width: 480px) {
-  .cinema-selector, .date-selector {
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .cinema-dropdown,
-  #date-select {
-    width: auto;
-    max-width: 300px;
-  }
-}
-
 .cinema-selector label, .date-selector label {
-  color: var(--text-primary);
-  font-weight: 400;
-  font-size: 14px;
+  color: var(--accent2TextColor);
+  font-weight: 600;
+  font-size: 18px;
   margin-right: 8px;
   display: inline-block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .cinema-dropdown {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
+  background: rgb(var(--postUsernamesBgColor));;
+  border: 2px dashed rgb(var(--bordersColor));
+  border-radius: 2em;
   padding: 6px 12px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
-  color: var(--text-primary);
+  color: var(--accent2TextColor);
   cursor: pointer;
   transition: all 0.2s ease;
-}
-
-.cinema-dropdown:hover {
-  border-color: var(--accent-color);
-  background: var(--hover-color);
+  font-weight: 600;
 }
 
 .cinema-dropdown:focus {
@@ -111,8 +185,8 @@
 .movies-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 20px;
+  gap: 24px;
+  margin-top: 18px;
 }
 
 @media (min-width: 480px) {
@@ -151,61 +225,11 @@
   }
 }
 
-.movie-poster {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 2/3;
-  flex-shrink: 0;
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid #e0e0e0;
-  margin: 0 auto;
-}
-
-@media (min-width: 480px) {
-  .movie-poster {
-    width: 100px;
-    height: 140px;
-    aspect-ratio: auto;
-    margin: 0;
-  }
-}
-
-.movie-poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.movie-card:hover .movie-poster img {
-  transform: scale(1.05);
-}
-
 .movie-header {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.movie-title {
-  color: var(--text-primary);
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.3;
-}
-
-.movie-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  margin-bottom: 10px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 12px;
 }
 
 .movie-year,
@@ -218,85 +242,71 @@
   color: var(--text-secondary);
   font-size: 12px;
   font-weight: 400;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .movie-genre {
-  margin-top: auto;
+  margin-top: 10px;
   display: flex;
   gap: 4px;
 }
 
 .genre-tag {
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 400;
-  border: 1px solid #e0e0e0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: block;
+  overflow: hidden;
+  padding: 0 12px;
+  line-height: 24px;
+  font-family: var(--monospaceFontFamily);
+  font-size: calc(1em - 2px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  border-radius: 2em;
+  color: rgb(var(--accent2TextColor));
+  background: rgb(var(--accent2BgColor));
+  border: 2px solid rgb(var(--bordersColor));
+}
+
+.cinema-block {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 2px solid rgb(var(--bordersColor));
+}
+
+.cinema-section:last-child {
+  border-bottom: 0;
 }
 
 .cinema-section {
-  background: #fafafa;
-  padding: 10px 12px;
-  border-top: 1px solid #f0f0f0;
+  padding: 10px 5px;
+  border-bottom: 1px solid rgb(var(--bordersColor));
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
 }
 
-.cinema-header {
-  margin-bottom: 8px;
-}
-
-@media (min-width: 480px) {
-  .cinema-section {
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 16px;
-  }
-  
-  .cinema-header {
-    margin-bottom: 0;
-    min-width: 160px;
-  }
-
-  .buy-tickets-btn {
-    margin-left: auto;
-  }
+.buy-tickets-btn {
+  margin-left: auto;
 }
 
 .cinema-header {
+  margin-right: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .cinema-header h4 {
-  color: var(--text-primary);
-  font-size: 14px;
-  font-weight: 500;
+  color: var(--accent2TextColor);
+  font-size: 18px;
+  font-weight: 600;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
-
-.expand-icon {
-  color: #9bd1de;
-  font-size: 1.5rem;
-  font-weight: 300;
-}
-
 
 .showtimes-label {
   color: #9bd1de;
   font-size: 0.8rem;
   font-weight: 600;
-  font-family: 'Comic Neue', cursive;
   letter-spacing: 0.5px;
   display: block;
 }
@@ -310,33 +320,29 @@
 
 .buy-tickets-btn,
 .showtime-btn {
-  background: var(--accent-color);
-  border: none;
-  color: white;
+  background: none;
+  border: 2px dashed rgb(var(--bordersColor));
+  color: var(--accent2TextColor);
   padding: 4px 12px;
   border-radius: 16px;
-  font-size: 11px;
-  font-weight: 400;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   text-decoration: none;
 }
 
 .buy-tickets-btn {
   text-decoration: none;
-  background: transparent;
-  color: var(--accent-color);
-  border: 1px solid var(--accent-color);
+  color: rgb(var(--accent2TextColor));
+  background-color: rgb(var(--accent2BgColor));
+  border: 2px solid transparent;
 }
 
 .buy-tickets-btn:hover {
-  background: var(--accent-color);
-  color: white;
-}
-
-.showtime-btn.post-action:hover {
-  background: #6ba3c7;
+  border: 2px solid rgb(var(--bordersColor));
+  background: transparent;
+  color: var(--accent2TextColor);
 }
 
 .post-meta a {
@@ -348,8 +354,32 @@
   text-decoration: underline;
 }
 
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.error {
+  display: block;
+  overflow: hidden;
+  padding: 0 12px;
+  line-height: 24px;
+  font-family: var(--monospaceFontFamily);
+  font-size: calc(1em - 1px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 2em;
+  color: rgb(var(--postUsernamesTextColor));
+  background-color: rgb(var(--postUsernamesBgColor));
+  border: 2px solid #ff6b6b;
+  text-align: center;
+  width: auto;
+}
+
 /* Loading and Error States */
-.movies-content > p {
+.movie-content > p {
   color: #9bd1de;
   text-align: center;
   font-size: 1.2rem;
@@ -360,7 +390,7 @@
   font-weight: 600;
 }
 
-.movies-content > p:not(.error) {
+.movie-content > p:not(.error) {
   background: rgba(155, 209, 222, 0.2);
   animation: pulse 2s infinite;
 }
@@ -378,19 +408,24 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .movies-content {
+  .movie-content {
     padding: 20px;
     border-radius: 15px;
   }
   
-  .movies-content h2 {
+  .movie-content h2 {
     font-size: 2rem;
-    margin-bottom: 20px;
+    padding: 5px;
   }
   
   .movies-list {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .movies-page {
+    margin-left: 20px;
+    margin-right: 20px;
   }
   
   .movie-card {
@@ -407,10 +442,6 @@
     height: auto;
   }
   
-  .movie-poster {
-    width: auto;
-  }
-  
   .movie-info-content {
     padding: 35px 15px 15px 15px;
   }
@@ -421,23 +452,17 @@
 }
 
 @media (max-width: 480px) {
-  .movies-content {
+  .movie-content {
     padding: 15px;
   }
   
-  .movies-content h2 {
+  .movie-content h2 {
     font-size: 1.8rem;
   }
   
   .movie-card {
     height: auto;
     flex-direction: column;
-  }
-  
-  .movie-poster {
-    width: 100%;
-    height: auto;
-    border-radius: 5px 5px 0 0;
   }
   
   .movie-info-content {
@@ -462,20 +487,20 @@
 }
 
 /* Custom scrollbar for webkit browsers */
-.movies-content::-webkit-scrollbar {
+.movie-content::-webkit-scrollbar {
   width: 8px;
 }
 
-.movies-content::-webkit-scrollbar-track {
+.movie-content::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
 
-.movies-content::-webkit-scrollbar-thumb {
+.movie-content::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 4px;
 }
 
-.movies-content::-webkit-scrollbar-thumb:hover {
+.movie-content::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }

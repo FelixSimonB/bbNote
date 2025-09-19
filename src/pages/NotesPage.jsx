@@ -8,7 +8,7 @@ import '../styles/notes.css';
 const NotesPage = () => {
   const { notes } = useContext(NotesContext);
   return (
-    <div>
+    <div className="notes-container">
       {notes.map((note) => (
         <NoteCard note={note} key={note.$id} />
       ))}

@@ -1,13 +1,10 @@
 /* Home page specific styles - Pixelution inspired */
+
 .home-page {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 0;
-  background: var(--bg-primary);
-  border: 3px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  margin: 20px;
+  width: fit-content;
+  justify-content: center;
+  justify-self: center;
 }
 
 .welcome-content {
@@ -17,20 +14,16 @@
   position: relative;
 }
 
-
-.welcome-content h2 {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 32px;
-  font-weight: 400;
-  margin: 24px 0 16px 0;
-  color: var(--text-primary);
+.welcome-content > h2 {
+  font-size: 24px;
 }
 
 .welcome-content p {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 16px;
-  color: var(--text-secondary);
-  margin: 0;
+  color: var(--accent2TextColor);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 @keyframes pageSlideIn {

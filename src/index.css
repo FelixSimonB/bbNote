@@ -10,15 +10,79 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   --spinner-animation-speed: 2s;
-  
-  /* Pixelution theme colors */
-  --bg-primary: #ffffff;
+  /* some variables */
+  --textLinksDecoration: underline;
+  --bodyFontFamily: 'Share Tech Mono', 'Calibri', sans-serif;
+  --bodyFontSize: 14px;
+  --monospaceFontFamily: 'Share-TechMono', monospace;
+  --accent1BgColor: 205, 216, 196;
+  --accent1TextColor: 131, 156, 153;
+  --accent2BgColor: 155, 191, 203;
+  --accent2TextColor: 255, 255, 255;
+  --backgroundColor: 249, 238, 221;
+  --bordersColor: 131, 156, 153;
+  --boxShadowsColor: 239, 210, 196;
+  --bodyTextColor: 131, 156, 153;
+  --boldTextColor: 140, 132, 153;
+  --italicTextColor: 214, 174, 176;
+  --headingsColor: 88, 136, 133;
+  --linksColor: 34, 34, 34;
+  --linksHoverColor: 239, 172, 154;
+  --bulletPointsColor: 88, 136, 133;
+  --blockquoteBordersColor: 88, 136, 133;
+  --postBgColor: 255, 255, 255;
+  --postAudioPlayerBgColor: 40, 40, 40;
+  --postAudioPlayerTextColor: 255, 255, 255;
+  --postLinksOverlayColor: 40, 40, 40;
+  --postLinksOverlayTextColor: 255, 255, 255;
+  --postPollBgColor: 251, 204, 177;
+  --postPollTextColor: 88, 136, 133;
+  --postPinnedLabelColor: 200, 224, 232;
+  --postPinnedTextColor: 131, 156, 153;
+  --postUsernamesBgColor: 255, 240, 205;
+  --postUsernamesTextColor: 131, 156, 153;
+  --sidebarImageTextColor: 131, 156, 153;
+  --sidebarBlogTitleColor: 131, 156, 153;
+  --textSelectionColor: 255, 255, 255;
+  --textSelectionBgColor: 251, 204, 177;
+  --scrollbarColor: 131, 156, 153;
+  --postWidth: 540px;
+  --postMargin: 80px;
+  --sidebarImageText: imagine;
+  --sidebarMarginTop: 80px;
+
+  /* theme colors */
+  --bg: #F9EEDD;
+  --bg-primary: #ffff;
   --bg-secondary: #f8f9fa;
   --border-color: #a8d5ba;
   --text-primary: #333333;
   --text-secondary: #666666;
   --accent-color: #7fb3d3;
   --hover-color: #f0f0f0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color:  var(--bg);
+}
+
+body {
+  position: relative;
+  font-family: var(--bodyFontFamily);
+  font-size: var(--bodyFontSize);
+  line-height: 1.5;
+  word-break: break-word;
+  word-wrap: break-word;
+  color: rgb(var(--bodyTextColor));
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+#app {
+  background-color: var(--bg);
 }
 
 .sticker-2 {
@@ -49,88 +113,103 @@
   gap: 5px;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-}
-
-#app {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
-  position: relative;
-}
-
 /* Window-like container styling inspired by Pixelution */
 .window-container {
-  background: var(--bg-primary);
-  border: 3px solid var(--border-color);
-  border-radius: 12px;
-  margin: 20px auto;
-  max-width: 800px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  -webkit-filter: drop-shadow(8px 8px 0 rgb(var(--boxShadowsColor)));
+  filter: drop-shadow(8px 8px 0 rgb(var(--boxShadowsColor)));
 }
 
-.window-header {
-  background: linear-gradient(to bottom, #e8f4f8, #d1e7dd);
-  border-bottom: 2px solid var(--border-color);
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 32px;
-  padding-bottom: 0;
+.window-container > .content {
+  position: relative;
+  padding: 8px;
+  background-color: rgb(var(--accent1BgColor));
+  box-shadow: 2px -2px 0 0 rgb(var(--accent1BgColor)),
+    0 -2px 0 0 rgb(var(--accent1BgColor)),
+    2px 0 0 0 rgb(var(--accent1BgColor)),
+    0 2px 0 0 rgb(var(--accent1BgColor)),
+    -2px 0 0 0 rgb(var(--accent1BgColor)),
+    0 0 0 2px rgb(var(--bordersColor)),
+    4px -4px 0 0 rgb(var(--bordersColor)),
+    0 -4px 0 0 rgb(var(--bordersColor)),
+    4px 0 0 0 rgb(var(--bordersColor)),
+    0 4px 0 0 rgb(var(--bordersColor)),
+    -4px 0 0 0 rgb(var(--bordersColor));
+}
+
+.without-tabs > .content {
+  box-shadow: 0 -2px 0 0 rgb(var(--accent1BgColor)),
+    2px 0 0 0 rgb(var(--accent1BgColor)),
+    0 2px 0 0 rgb(var(--accent1BgColor)),
+    -2px 0 0 0 rgb(var(--accent1BgColor)),
+    0 0 0 2px rgb(var(--bordersColor)),
+    0 -4px 0 0 rgb(var(--bordersColor)),
+    4px 0 0 0 rgb(var(--bordersColor)),
+    0 4px 0 0 rgb(var(--bordersColor)),
+    -4px 0 0 0 rgb(var(--bordersColor));
+}
+
+.window-radio {
+  overflow: hidden;
+  position: absolute;
+  left: -1000px;
+  width: 0;
+  height: 0;
 }
 
 .window-tabs {
   display: flex;
-  gap: 4px;
-}
-
-.window-tab {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-bottom: none;
-  border-radius: 8px 8px 0 0;
-  padding: 6px 16px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  text-decoration: none;
+  justify-content: flex-end;
+  align-items: flex-start;
+  overflow: hidden;
   position: relative;
-  top: 2px;
+  margin-left: -4px;
+  width: calc(100% + 8px);
+  height: 26px;
+}
+
+.window-tabs label {
+  flex: initial;
+  display: block;
   cursor: pointer;
-  transition: all 0.2s ease;
+  position: relative;
+  margin-left: 4px;
+  padding: 4px 4px 0 4px;
 }
 
-.window-tab:hover {
-  background: var(--hover-color);
-  color: var(--text-primary);
+.window-tabs label {
+  --tabBgColor: rgb(var(--accent2BgColor));
+  color: rgb(var(--accent2TextColor));
 }
 
-.window-tab.active {
-  background: var(--bg-primary);
-  border-bottom: 1px solid var(--bg-primary);
-  z-index: 2;
-  color: var(--text-primary);
-  font-weight: 500;
-  margin-bottom: -1px;
+input[class="window-radio"]:checked ~ .window-tabs label.checked {
+  --tabBgColor: rgb(var(--accent1BgColor));
+  color: rgb(var(--accent1TextColor));
+  cursor: default;
+  z-index: 5;
 }
 
-.window-controls {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  font-size: 12px;
-  color: var(--text-secondary);
+.window-tab > span {
+  display: block;
+  position: relative;
+  padding: 0 20px 0 12px;
+  height: 18px;
+  line-height: 18px;
+  font-family: var(--monospaceFontFamily);
+  font-size: calc(1em - 2px);
+  background: var(--tabBgColor);
+  box-shadow: 2px 4px 0 var(--tabBgColor),
+    0 -2px 0 var(--tabBgColor),
+    2px 0 0 var(--tabBgColor),
+    -2px 0 0 var(--tabBgColor),
+    -4px 2px 0 var(--tabBgColor), -6px 4px 0 var(--tabBgColor), -8px 6px 0 var(--tabBgColor), -10px 8px 0 var(--tabBgColor), -12px 10px 0 var(--tabBgColor), -14px 12px 0 var(--tabBgColor), -16px 14px 0 var(--tabBgColor), -18px 16px 0 var(--tabBgColor), -20px 18px 0 var(--tabBgColor), 4px 0 0 rgb(var(--bordersColor)), 0 -4px 0 rgb(var(--bordersColor)), 2px -2px 0 rgb(var(--bordersColor)), -2px -2px 0 rgb(var(--bordersColor)), -4px 0 0 rgb(var(--bordersColor)), -6px 2px 0 rgb(var(--bordersColor)), -8px 4px 0 rgb(var(--bordersColor)), -10px 6px 0 rgb(var(--bordersColor)), -12px 8px 0 rgb(var(--bordersColor)), -14px 10px 0 rgb(var(--bordersColor)), -16px 12px 0 rgb(var(--bordersColor)), -18px 14px 0 rgb(var(--bordersColor)), -20px 16px 0 rgb(var(--bordersColor));
 }
 
 .window-content {
-  padding: 24px;
-  background: var(--bg-primary);
-  border-top: none;
-  position: relative;
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+  background-color: rgb(var(--postBgColor));
+  border: 2px solid rgb(var(--bordersColor));
 }
 
 /* Post-like styling for content blocks */
@@ -142,27 +221,10 @@ body {
   overflow: hidden;
 }
 
-.post-header {
-  padding: 12px 16px;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
 .post-content {
   padding: 16px;
 }
 
-.post-footer {
-  padding: 8px 16px;
-  border-top: 1px solid #f0f0f0;
-  background: #fafafa;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: var(--text-secondary);
-}
 
 .post-actions {
   display: flex;
@@ -170,17 +232,13 @@ body {
 }
 
 .post-action {
-  background: var(--accent-color);
-  color: white;
+  background: rgb(var(--accent2BgColor));
+  color: rgb(var(--accent2TextColor));;
   border: none;
   border-radius: 16px;
   padding: 4px 12px;
-  font-size: 11px;
+  font-size: 12px;
   cursor: pointer;
   transition: background-color 0.2s;
-}
-
-.post-action:hover {
-  background: #6ba3c7;
 }
 

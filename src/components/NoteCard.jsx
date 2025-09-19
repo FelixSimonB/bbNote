@@ -21,13 +21,8 @@ const NoteCard = ({ note }) => {
 
   const body = parser(note.body);
   const [newBody, setNewBody] = useState(body);
-  const [position, setPosition] = useState(JSON.parse(note.position));
-  const [isDragging, setIsDragging] = useState(false);
   const [colors, setColors] = useState(JSON.parse(note.colors));
-
-  let mouseStartPos = { x: 0, y: 0 };
   const cardRef = useRef(null);
-
   const textAreaRef = useRef(null);
 
   useEffect(() => {
@@ -38,82 +33,15 @@ const NoteCard = ({ note }) => {
       note,
       textAreaRef,
       setNewBody,
-      setPosition,
+      null, // No longer setting position
       setColors,
-      autoCardSize,
+      autoCardSize
     );
 
     return () => {
       unsubscribe();
     };
   }, [note.$id]);
-
-  const mouseDown = (e) => {
-    if (e.target.className === "card-header") {
-      mouseStartPos = { x: e.clientX, y: e.clientY };
-      document.addEventListener("mousemove", mouseMove);
-      document.addEventListener("mouseup", mouseUp);
-      setIsDragging(true);
-      cardToTop(cardRef);
-      setSelectedNote(note);
-    }
-  };
-
-  const touchStart = (e) => {
-    if (e.target.className === "card-header") {
-      mouseStartPos = { x: e.clientX, y: e.clientY };
-      document.addEventListener("mousemove", mouseMove);
-      document.addEventListener("mouseup", mouseUp);
-      setIsDragging(true);
-      cardToTop(cardRef);
-      setSelectedNote(note);
-    }
-  };
-
-  const mouseMove = (e) => {
-    const mouseMoveDir = {
-      x: mouseStartPos.x - e.clientX,
-      y: mouseStartPos.y - e.clientY,
-    };
-
-    mouseStartPos = { x: e.clientX, y: e.clientY };
-
-    const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
-    setPosition(newPosition);
-  };
-
-  const touchMove = (e) => {
-    const touch = e.touches[0];
-    const mouseMoveDir = {
-      x: mouseStartPos.x - touch.clientX,
-      y: mouseStartPos.y - touch.clientY,
-    };
-
-    mouseStartPos = { x: touch.clientX, y: touch.clientY };
-
-    const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
-    setPosition(newPosition);
-  };
-
-  const mouseUp = async (e) => {
-    document.removeEventListener("mousemove", mouseMove);
-    document.removeEventListener("mouseup", mouseUp);
-    setIsDragging(false);
-
-    const newPosition = setNewOffset(cardRef.current);
-    await sleep(500);
-    saveData("position", newPosition);
-  };
-
-  const touchEnd = async () => {
-    document.removeEventListener("touchmove", touchMove);
-    document.removeEventListener("touchend", touchEnd);
-    setIsDragging(false);
-
-    const newPosition = setNewOffset(cardRef.current);
-    await sleep(500);
-    saveData("position", newPosition);
-  };
 
   const saveData = async (key, value) => {
     const payload = { [key]: JSON.stringify(value) };
@@ -142,20 +70,15 @@ const NoteCard = ({ note }) => {
     setNewBody(e.target.value);
   };
 
+
   return (
     <div
       ref={cardRef}
-      className={`card ${!isDragging ? "transition" : ""}`}
-      style={{
-        backgroundColor: colors.colorBody,
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-      }}
+      className="card"
+      style={{ backgroundColor: colors.colorBody }}
     >
       <div
         className="card-header"
-        onMouseDown={mouseDown}
-        onTouchStart={touchStart}
         style={{ backgroundColor: colors.colorHeader }}
       >
         <DeleteButton noteId={note.$id} />

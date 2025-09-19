@@ -80,9 +80,18 @@ export const fetchMovies = async (selectedCinema, selectedDate) => {
         if (link) {
           path = new URL(link).pathname + new URL(link).search;
         }
+
+        const selectedCinemaName = getCinemas().find(cinema => cinema.id === selectedCinema)?.name || 'Unknown Cinema';
+        
+        // Extract just the cinema name part (after the mall name)
+        let displayName = cinemaName;
+        if (cinemaName.includes(selectedCinemaName)) {
+          // Remove the mall name and any leading/trailing spaces or dashes
+          displayName = cinemaName.replace(selectedCinemaName, '').replace(/^[\s-]+/g, '');
+        }
         
         return {
-          name: cinemaName,
+          name: displayName || cinemaName,
           showtimes: times.length > 0 ? times : ['No showtimes available'],
           link: path ? path : null
         };
@@ -114,7 +123,7 @@ export const fetchMovies = async (selectedCinema, selectedDate) => {
  * List of supported cinemas with their IDs and names
  */
 export const getCinemas = () => [
-  { id: '372', name: 'Ayala Mall Manila Bay' },
+  { id: '372', name: 'Ayala Malls Manila Bay' },
   { id: '155', name: 'SM Mall of Asia' },
   { id: '14', name: 'Robinsons Place Manila' },
   { id: '35', name: 'Glorietta 4' },
