@@ -46,7 +46,7 @@ export const subscribe = (
         response.events.includes("databases.*.collections.*.documents.*.update")
       ) {
         setNewBody(parser(response.payload.body));
-        setPosition(JSON.parse(response.payload.position));
+        //setPosition(JSON.parse(response.payload.position));
         setColors(JSON.parse(response.payload.colors));
         autoCardSize(textAreaRef);
       }
